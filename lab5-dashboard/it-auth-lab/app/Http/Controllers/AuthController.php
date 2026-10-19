@@ -21,7 +21,7 @@ class AuthController extends Controller
         'password' => Hash::make($data['password'])
     ]);
     // TODO: save the user and redirect to the login page.
-    return redirect()->route('login')->with('success', 'Account created successfully, you can log in');
+    return redirect()->route('login')->with('success', 'Account created successfully, you can log in')->withInput(['email' => $data['email']]);
     }
 
     public function login(Request $request)
@@ -44,6 +44,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
     // TODO: complete using page 5.
-    
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('login');
     }
 }
