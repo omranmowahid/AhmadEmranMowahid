@@ -22,3 +22,17 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Local SQLite database (Laravel 11+ default)
+/database/*.sqlite
+/database/*.sqlite-journal
+
+# PHP-CS-Fixer cache
+.php-cs-fixer.cache
+
+# VS Code local history
+/.history
+
+# Local env overrides
+.env.local
+.env.*.local
