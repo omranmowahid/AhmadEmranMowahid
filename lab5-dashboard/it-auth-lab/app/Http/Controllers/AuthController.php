@@ -15,14 +15,20 @@ class AuthController extends Controller
         'password' => 'required|string|min:8|confirmed',
     ]);
     // TODO: create a User and set name, email, password.
+    $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password'])
+    ]);
     // TODO: save the user and redirect to the login page.
+    return redirect()->route('login')->with('success', 'Account created successfully, you can log in');
     }
 
     public function login(Request $request)
     {
     // TODO: complete using page 5.
     }
-    
+
     public function logout(Request $request)
     {
     // TODO: complete using page 5.
