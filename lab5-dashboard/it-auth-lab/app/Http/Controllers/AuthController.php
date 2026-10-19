@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AuthController extends Controller // controller is the logic of our application, validations, ...
 {
-    public function register(Request $request)
+    public function register(Request $request) // using request we take what was posted and then we parse and validate them here
     {
         $data = $request->validate([
         'name' => 'required|string|max:255',
@@ -15,7 +15,7 @@ class AuthController extends Controller
         'password' => 'required|string|min:8|confirmed',
     ]);
     // TODO: create a User and set name, email, password.
-    $user = User::create([
+    $user = User::create([ // User class  is from app/model (the seed database, where we migrate from) we now add data to that database, that was created at first step, with cmd
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
