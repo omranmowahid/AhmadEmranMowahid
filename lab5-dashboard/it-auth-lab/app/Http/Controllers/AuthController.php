@@ -26,11 +26,24 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-    // TODO: complete using page 5.
+    // TODO: validate email and password into $credentials.
+    $credentials = $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required|string',
+    ]);
+    $accepted = Auth::attempt($credentials);
+    if (! $accepted) {
+    return back()->withErrors(['email' => 'Email or password is incorrect.'])->onlyInput('email');
+    }
+
+    $request->session()->regenerate();
+    return redirect()->intended(route('dashboard'));
+    
     }
 
     public function logout(Request $request)
     {
     // TODO: complete using page 5.
+    
     }
 }
