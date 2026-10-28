@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Book;
@@ -8,6 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+        $books = Book::where('user_id', Auth::id())
+            ->latest()
+            ->get();
+
+        return view('books.create', compact('books'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
